@@ -13,7 +13,7 @@ Application should accept these command line arguments:
 -delete
  ask for id of document to delete from database
 
-====================================================================================================================================
+===========================================================================================================
 start mongo with a command similar to:
 mongod --dbpath D:\datalex\IdeaProjects\nosql\db
 
