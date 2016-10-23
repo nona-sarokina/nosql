@@ -11,36 +11,38 @@ import java.util.Map;
 /**
  * Created by Nona_Sarokina on 10/17/2016.
  */
-public class MongoEditHandler
-{
-    protected static final String NOSQL = "nosql";
-    protected static final String MODULE_13 = "module13";
-    protected static final String ID = "_id";
+public class MongoEditHandler {
+    protected static final String NOSQL_COLLECTION_NAME = "nosql";
+    protected static final String MODULE_13_DB_NAME = "module13";
+    protected static final String ID_FIELD_NAME = "_id";
 
-    MongoDatabase database;
+    private MongoDatabase database;
 
     public MongoEditHandler() {
         MongoClient mongoClient = new MongoClient();
-        database = mongoClient.getDatabase(MODULE_13);
+        database = mongoClient.getDatabase(MODULE_13_DB_NAME);
+    }
+
+    public MongoEditHandler(MongoDatabase database) {
+        this.database = database;
     }
 
     private MongoDatabase getDatabase() {
         return database;
     }
 
+    public void createDocument(Map<String, Object> values) {
+        Document document = new Document(values);
+        getDatabase().getCollection(NOSQL_COLLECTION_NAME).insertOne(document);
 
-    public void creteDocument(Map<String, Object> values) {
-        getDatabase().getCollection(NOSQL).insertOne(
-            new Document(values));
     }
 
     public ArrayList<Document> find(String name, String value) {
-        return getDatabase().getCollection(NOSQL).find(new Document(name, value)).into(new ArrayList<Document>());
+        return getDatabase().getCollection(NOSQL_COLLECTION_NAME).find(new Document(name, value)).into(new ArrayList<Document>());
 
     }
 
-    public void delete(String id) {
-        System.out
-            .println(getDatabase().getCollection(NOSQL).findOneAndDelete(new Document(ID, new ObjectId(id))) + "has been deleted");
+    public Document delete(String id) {
+        return getDatabase().getCollection(NOSQL_COLLECTION_NAME).findOneAndDelete(new Document(ID_FIELD_NAME, new ObjectId(id)));
     }
 }
