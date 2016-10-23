@@ -1,5 +1,4 @@
-package jmp.nosql;
-
+import jmp.nosql.MongoCLIRunner;
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
 

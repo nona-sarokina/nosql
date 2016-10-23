@@ -92,6 +92,8 @@ public class MongoCLIRunner {
         Document deletedDocument = processor.delete(id);
         if (deletedDocument != null) {
             System.out.println("Document " + deletedDocument + "has been deleted");
+        } else {
+            System.out.println("No such element");
         }
     }
 }
