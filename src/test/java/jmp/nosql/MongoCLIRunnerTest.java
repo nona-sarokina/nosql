@@ -66,38 +66,31 @@ public class MongoCLIRunnerTest {
         verify(reader, times(1)).readLine();
     }
 
-    @Test(expected = NumberFormatException.class)
-    public void testRun_wrongInput() throws Exception {
-        when(reader.readLine()).thenReturn("wrong").thenReturn(EXIT_OPTION);
-        runner.run();
-        verify(reader, times(1)).readLine();
-    }
-
     @Test
-    public void testRun_userAbleToChooseCreateOptionAfterIOException() throws Exception {
-        when(reader.readLine()).thenThrow(IOException.class).thenReturn(CREATE_OPTION).thenReturn(NAME).thenReturn(VALUE)
+    public void testRun_userAbleToChooseCreateOptionAfterAnyExceptionWasThrown() throws Exception {
+        when(reader.readLine()).thenThrow(Exception.class).thenReturn(CREATE_OPTION).thenReturn(NAME).thenReturn(VALUE)
                 .thenReturn("").thenReturn(EXIT_OPTION);
         runner.run();
         verify(runner.getProcessor(), times(1)).createDocument(anyMap());
     }
 
     @Test
-    public void testRun_userAbleToChooseFindOptionAfterIOException() throws Exception {
-        when(reader.readLine()).thenThrow(IOException.class).thenReturn(FIND_OPTION).thenReturn(EXIT_OPTION);
+    public void testRun_userAbleToChooseFindOptionAfterAnyExceptionWasThrown() throws Exception {
+        when(reader.readLine()).thenThrow(Exception.class).thenReturn(FIND_OPTION).thenReturn(EXIT_OPTION);
         runner.run();
         verify(runner.getProcessor(), times(1)).find(anyString(), anyString());
     }
 
     @Test
-    public void testRun_userAbleToChooseDeleteOptionAfterIOException() throws Exception {
-        when(reader.readLine()).thenThrow(IOException.class).thenReturn(DELETE_OPTION).thenReturn(EXIT_OPTION);
+    public void testRun_userAbleToChooseDeleteOptionAfterAnyExceptionWasThrown() throws Exception {
+        when(reader.readLine()).thenThrow(Exception.class).thenReturn(DELETE_OPTION).thenReturn(EXIT_OPTION);
         runner.run();
         verify(runner.getProcessor(), times(1)).delete(anyString());
     }
 
     @Test
-    public void testRun_userAbleToChooseExitOptionAfterIOException() throws Exception {
-        when(reader.readLine()).thenThrow(IOException.class).thenReturn(EXIT_OPTION).thenReturn(EXIT_OPTION);
+    public void testRun_userAbleToChooseExitOptionAfterAnyExceptionWasThrown() throws Exception {
+        when(reader.readLine()).thenThrow(Exception.class).thenReturn(EXIT_OPTION).thenReturn(EXIT_OPTION);
         runner.run();
         verify(reader, times(2)).readLine();
     }

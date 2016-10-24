@@ -48,11 +48,9 @@ public class MongoCLIRunner {
                     default:
                         System.out.println("Wrong option, please try again");
                 }
-            } catch (IOException e) {
-                System.out.println("Something had happened");
-            } /*catch (NumberFormatException e) {
-                System.out.println("Please enter proper number option (1-4)");
-            }*/
+            } catch (Exception e) {
+                System.out.println("Something had happened, please try again");
+            }
         } while (true);
     }
 
