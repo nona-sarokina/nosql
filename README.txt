@@ -20,3 +20,11 @@ mongod --dbpath D:\datalex\IdeaProjects\nosql\db
 mongo will start with default settings (host, port, etc.)
 
 start an app and choose prefered options and see how it works.
+===========================================================================================================
+Infrastructure. Unit testing. Module 16
+
+Use your application for task MongoDB and cover functionality by unit tests.
+Refactor code if needed.
+===========================================================================================================
+
+Unit tests was made for jmp.nosql package.
