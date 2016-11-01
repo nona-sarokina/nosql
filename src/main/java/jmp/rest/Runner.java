@@ -25,7 +25,7 @@ public class Runner {
 
         URI baseUri = UriBuilder.fromUri(HTTP_LOCALHOST).port(8888).build();
         ResourceConfig config = new MongoCLIResourceConfig();
-        Server jettyServer = JettyHttpContainerFactory.createServer(baseUri, config);
+        Server jettyServer = JettyHttpContainerFactory.createServer(baseUri, config, false);
         jettyServer.setHandler(context);
 
         ServletHolder jerseyServlet = context.addServlet(
