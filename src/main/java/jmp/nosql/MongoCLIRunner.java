@@ -84,9 +84,9 @@ public class MongoCLIRunner {
         System.out.println(processor.find(name, value));
     }
 
-    private void delete(BufferedReader scanner) throws IOException {
+    private void delete(BufferedReader reader) throws IOException {
         System.out.println("Please enter the id of element:");
-        String id = scanner.readLine();
+        String id = reader.readLine();
         Document deletedDocument = processor.delete(id);
         if (deletedDocument != null) {
             System.out.println("Document " + deletedDocument + "has been deleted");

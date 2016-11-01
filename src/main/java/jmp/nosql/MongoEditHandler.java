@@ -31,10 +31,10 @@ public class MongoEditHandler {
         return database;
     }
 
-    public void createDocument(Map<String, Object> values) {
+    public Document createDocument(Map<String, Object> values) {
         Document document = new Document(values);
         getDatabase().getCollection(NOSQL_COLLECTION_NAME).insertOne(document);
-
+        return document;
     }
 
     public ArrayList<Document> find(String name, String value) {
