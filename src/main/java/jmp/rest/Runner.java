@@ -18,10 +18,12 @@ public class Runner {
 
     public static final String HTTP_LOCALHOST = "http://localhost/";
     public static final String PATH_SPEC = "/*";
+    public static final String PARAM = "jersey.config.server.provider.classnames";
+    public static final String CONTEXT_PATH = "/";
 
     public static void main(String[] args) {
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        context.setContextPath("/");
+        context.setContextPath(CONTEXT_PATH);
 
         URI baseUri = UriBuilder.fromUri(HTTP_LOCALHOST).port(8888).build();
         ResourceConfig config = new MongoCLIResourceConfig();
@@ -30,11 +32,9 @@ public class Runner {
 
         ServletHolder jerseyServlet = context.addServlet(
                 org.glassfish.jersey.servlet.ServletContainer.class,  PATH_SPEC);
-        //jerseyServlet.setInitParameter("cacheControl","max-age=0,public");
         jerseyServlet.setInitOrder(0);
 
-        jerseyServlet.setInitParameter(
-                "jersey.config.server.provider.classnames",
+        jerseyServlet.setInitParameter(PARAM,
                 MongoCLIRestService.class.getCanonicalName());
 
         try {
